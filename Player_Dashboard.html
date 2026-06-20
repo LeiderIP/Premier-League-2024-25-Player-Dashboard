@@ -7,18 +7,18 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#0b0e16;--panel:#12161f;--panel2:#191e2a;
-  --blue:#3B82F6;--green:#22C55E;--red:#EF4444;--amber:#F59E0B;
-  --text-pri:#F4F6FB;--text-sec:#8891A6;
-  --border:rgba(255,255,255,0.08);
+  --bg:#060608;--panel:#0e0e12;--panel2:#16161c;
+  --green:#22C55E;--red:#EF4444;--amber:#F59E0B;
+  --text-pri:#FAFAFC;--text-sec:#76757f;
+  --border:rgba(255,255,255,0.07);
   --font-head:'Bebas Neue',Impact,sans-serif;
   --font-body:'DM Sans',sans-serif;
-  --pitch-bg:#123a22;
+  --pitch-bg:#0f3a20;
 }
 body.light{
-  --bg:#f3f4f8;--panel:#fff;--panel2:#eceef4;
-  --text-pri:#13192b;--text-sec:#6b7387;
-  --border:rgba(20,30,60,0.10);
+  --bg:#f0f0f3;--panel:#fff;--panel2:#e8e8ee;
+  --text-pri:#0e0e12;--text-sec:#6b6b75;
+  --border:rgba(20,20,30,0.10);
   --pitch-bg:#2d8a45;
 }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -26,7 +26,7 @@ body{background:var(--bg);color:var(--text-pri);font-family:var(--font-body);
      min-height:100vh;display:flex;flex-direction:column;align-items:center}
 #bg-glow{position:fixed;inset:0;z-index:-1;pointer-events:none;transition:background 0.6s ease}
 #theme-btn{position:fixed;top:14px;right:18px;z-index:9999;
-  background:rgba(59,130,246,0.12);color:var(--text-pri);
+  background:rgba(255,255,255,0.08);color:var(--text-pri);
   border:1.5px solid var(--border);border-radius:6px;
   padding:6px 16px;font-family:var(--font-body);font-size:12px;
   letter-spacing:.08em;cursor:pointer}
@@ -44,37 +44,60 @@ select,.search-input{background:var(--panel);color:var(--text-pri);border:1.5px 
 select{padding-right:32px;appearance:none;
         background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238891A6' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
         background-repeat:no-repeat;background-position:right 10px center}
-select:hover,select:focus,.search-input:focus{border-color:var(--blue)}
+select:hover,select:focus,.search-input:focus{border-color:var(--accent-c,#fff)}
 .search-input::placeholder{color:var(--text-sec);opacity:.7}
 
 .dash{display:grid;grid-template-columns:repeat(12,1fr);gap:14px;
        max-width:1320px;width:100%;padding:18px 20px 30px}
 .card{background:linear-gradient(180deg,var(--panel),var(--panel) 60%,var(--panel2));
-       border:1px solid var(--border);border-top:2.5px solid var(--accent-c, var(--border));
-       border-radius:14px;padding:18px 20px;position:relative;overflow:hidden;
+       border:1px solid var(--border);border-radius:14px;padding:18px 20px;
+       position:relative;overflow:hidden;
        transition:transform .18s ease, box-shadow .18s ease}
 .card:hover{transform:translateY(-2px);box-shadow:0 10px 28px -8px var(--accent-glow, rgba(0,0,0,0.4))}
 .card-title{font-size:.66rem;color:var(--text-sec);letter-spacing:.13em;
              text-transform:uppercase;margin-bottom:12px}
 
-.kpi-strip{grid-column:1/-1;display:flex;gap:12px;flex-wrap:wrap;border-top:none !important;
-            background:none !important;padding:0 !important}
-.kpi{flex:1;min-width:100px;background:linear-gradient(160deg,var(--panel),var(--panel2));
-      border:1px solid var(--border);border-top:2.5px solid var(--accent-c, var(--border));
-      border-radius:12px;padding:14px 16px;text-align:center;
-      transition:transform .18s ease, box-shadow .18s ease}
-.kpi:hover{transform:translateY(-2px);box-shadow:0 8px 22px -6px var(--accent-glow, rgba(0,0,0,0.4))}
-.kpi .lbl{font-size:.58rem;color:var(--text-sec);letter-spacing:.1em;text-transform:uppercase}
-.kpi .val{font-family:var(--font-head);font-size:1.7rem;letter-spacing:.04em;margin-top:2px}
+/* ── Hero player card ── */
+.hero{grid-column:span 5;display:flex;flex-direction:column;justify-content:center;
+       padding:28px 30px;border:1px solid var(--border);border-radius:18px;
+       background:
+         radial-gradient(circle at 12% 15%, var(--accent-wash, transparent), transparent 55%),
+         linear-gradient(160deg,var(--panel),var(--panel2));
+       position:relative}
+.hero::before{content:'';position:absolute;top:0;left:0;width:6px;height:100%;
+               background:var(--accent-c,var(--border))}
+.hero .badge-row{display:flex;gap:8px;margin-bottom:10px}
+.hero .badge{font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;
+              padding:4px 10px;border-radius:20px;border:1px solid var(--border);
+              color:var(--text-sec)}
+.hero .badge.team{color:var(--accent-c);border-color:var(--accent-c)}
+.hero h2{font-family:var(--font-head);font-size:3rem;line-height:1;letter-spacing:.02em;
+          color:var(--text-pri);text-shadow:0 0 30px var(--accent-glow,transparent)}
+.hero .headline-stats{display:flex;gap:28px;margin-top:22px}
+.hero .hstat{display:flex;flex-direction:column}
+.hero .hstat .n{font-family:var(--font-head);font-size:2.6rem;line-height:1;color:var(--accent-c)}
+.hero .hstat .l{font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-sec);margin-top:3px}
 
-.identity{grid-column:span 3;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:4px;
-           background:radial-gradient(ellipse at 50% 30%, var(--accent-wash, transparent), var(--panel) 70%)}
-.identity .player-name{font-family:var(--font-head);font-size:1.5rem;text-align:center;line-height:1.1;
-                       text-shadow:0 0 18px var(--accent-glow, transparent)}
-.identity .sub{font-size:.78rem;color:var(--text-sec);text-align:center}
+/* ── Circular percentile gauges ── */
+.gauge-cluster{grid-column:span 7;display:flex;align-items:center;justify-content:space-around;
+                flex-wrap:wrap;gap:10px}
+.gauge{display:flex;flex-direction:column;align-items:center;gap:8px}
+.gauge-svg{width:88px;height:88px}
+.gauge-label{font-size:.68rem;color:var(--text-sec);text-align:center;letter-spacing:.04em}
+.gauge-pct{font-family:var(--font-head);font-size:1.1rem}
 
-.form-row{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
-.form-chip{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+/* ── Even pitch split ── */
+.pitch-card{grid-column:span 6;display:flex;flex-direction:column}
+#heatmap-svg,#shotmap-svg{width:100%;height:auto;display:block;border-radius:10px}
+
+/* ── Form timeline (full width) ── */
+.form-strip{grid-column:1/-1;display:flex;align-items:center;gap:10px;
+             padding:14px 22px;background:none;border:1px solid var(--border);
+             border-radius:14px;overflow-x:auto}
+.form-strip .ft-label{font-size:.66rem;color:var(--text-sec);letter-spacing:.13em;
+                        text-transform:uppercase;flex-shrink:0;margin-right:8px}
+.form-row{display:flex;gap:8px;flex-wrap:nowrap}
+.form-chip{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;
             font-weight:700;font-size:.78rem;color:#fff;cursor:pointer;flex-shrink:0;
             transition:transform .12s ease;position:relative}
 .form-chip:hover{transform:scale(1.18)}
@@ -85,28 +108,18 @@ select:hover,select:focus,.search-input:focus{border-color:var(--blue)}
                     border-radius:50%;width:14px;height:14px;font-size:.55rem;
                     display:flex;align-items:center;justify-content:center;font-weight:700}
 
-.pct-card{grid-column:span 6;display:flex;flex-direction:column;gap:10px}
-.pct-row{display:flex;align-items:center;gap:10px}
-.pct-label{width:100px;flex-shrink:0;font-size:.74rem;color:var(--text-sec);text-align:right}
-.pct-track{flex:1;height:10px;background:var(--panel2);border-radius:5px;position:relative}
-.pct-fill{height:100%;border-radius:5px;background:linear-gradient(90deg,var(--blue),var(--accent-c,var(--blue)))}
-.pct-val{width:58px;flex-shrink:0;font-family:var(--font-head);font-size:.95rem}
-
-.heatmap-card{grid-column:span 4;display:flex;flex-direction:column}
-#heatmap-svg{width:100%;height:auto;display:block;border-radius:10px}
-
-.shotmap-card{grid-column:span 5;display:flex;flex-direction:column;justify-content:center}
-#shotmap-svg{width:100%;height:auto;display:block;border-radius:10px}
-
-.disc-card{grid-column:span 3;display:flex;flex-direction:column;justify-content:space-evenly}
-.mini-stat-row{display:flex;justify-content:space-between;align-items:center;
-                padding:7px 0;border-bottom:1px solid var(--border);font-size:.82rem}
-.mini-stat-row:last-child{border-bottom:none}
-.mini-stat-row .v{font-weight:700;font-family:var(--font-head);font-size:1.05rem}
+/* ── Bottom ticker strip (full width) ── */
+.ticker{grid-column:1/-1;display:flex;flex-wrap:wrap;justify-content:space-between;
+         gap:6px;padding:16px 26px;border:1px solid var(--border);border-radius:14px;background:none}
+.ticker-item{display:flex;align-items:center;gap:8px;padding:0 14px;
+              border-right:1px solid var(--border)}
+.ticker-item:last-child{border-right:none}
+.ticker-item .tl{font-size:.62rem;color:var(--text-sec);letter-spacing:.08em;text-transform:uppercase}
+.ticker-item .tv{font-family:var(--font-head);font-size:1.15rem}
 
 #tooltip{
   position:fixed;display:none;z-index:9998;
-  background:rgba(10,14,24,0.96);border:1px solid var(--blue);
+  background:rgba(10,14,24,0.96);border:1px solid var(--accent-c,#fff);
   border-radius:8px;padding:9px 13px;pointer-events:none;
   font-family:var(--font-body);font-size:.76rem;line-height:1.5;
   min-width:150px;color:var(--text-pri);
@@ -118,7 +131,7 @@ footer{margin:6px 0 26px;font-size:.66rem;color:var(--text-sec);
 
 @media (max-width: 900px) {
   .dash{grid-template-columns:repeat(2,1fr)}
-  .pct-card,.heatmap-card,.shotmap-card,.disc-card,.identity{grid-column:1/-1}
+  .hero,.gauge-cluster,.pitch-card{grid-column:1/-1}
 }
 </style>
 </head>
@@ -204,56 +217,57 @@ function render() {
   const name = document.getElementById('sel-player').value;
   const p = PLAYERS_DATA.find(x => x.player === name);
   if (!p) return;
-  const color = TEAM_COLORS[p.team] || '#3B82F6';
+  const color = TEAM_COLORS[p.team] || '#E5484D';
   applyTeamTheme(color);
 
   document.getElementById('dash').innerHTML = `
-    <div class="card kpi-strip">
-      <div class="kpi"><div class="lbl">Minutes</div><div class="val">${p.minutes}</div></div>
-      <div class="kpi"><div class="lbl">Matches</div><div class="val">${p.matches}</div></div>
-      <div class="kpi"><div class="lbl">Goals</div><div class="val" style="color:${color}">${p.goals}</div></div>
-      <div class="kpi"><div class="lbl">Assists</div><div class="val">${p.assists}</div></div>
-      <div class="kpi"><div class="lbl">xG</div><div class="val">${p.xg}</div></div>
-      <div class="kpi"><div class="lbl">Shots</div><div class="val">${p.shots}</div></div>
-      <div class="kpi"><div class="lbl">Pass %</div><div class="val">${p.pass_pct}%</div></div>
+    <div class="hero">
+      <div class="badge-row">
+        <div class="badge team">${p.team}</div>
+        <div class="badge">${p.position}</div>
+      </div>
+      <h2>${p.player}</h2>
+      <div class="headline-stats">
+        <div class="hstat"><div class="n">${p.goals}</div><div class="l">Goals</div></div>
+        <div class="hstat"><div class="n">${p.assists}</div><div class="l">Assists</div></div>
+        <div class="hstat"><div class="n">${p.xg}</div><div class="l">xG</div></div>
+        <div class="hstat"><div class="n">${p.minutes}</div><div class="l">Minutes</div></div>
+      </div>
     </div>
 
-    <div class="card identity">
-      <div class="player-name" style="color:${color}">${p.player}</div>
-      <div class="sub">${p.team}</div>
-      <div class="sub">${p.position} · ${GROUP_LABEL[p.position_group]}</div>
+    <div class="card gauge-cluster" style="flex-direction:column;align-items:stretch">
+      <div class="card-title" id="gauge-title">Percentile vs Position</div>
+      <div id="gauge-rows" style="display:flex;align-items:center;justify-content:space-around;flex-wrap:wrap;gap:10px;flex:1"></div>
     </div>
 
-    <div class="card" style="grid-column:span 3;display:flex;flex-direction:column">
-      <div class="card-title">Recent Form</div>
-      <div class="form-row" id="form-row" style="flex:1;align-content:center"></div>
-    </div>
-
-    <div class="card pct-card">
-      <div class="card-title">vs ${GROUP_LABEL[p.position_group]}s — Percentile Rank</div>
-      <div id="pct-rows"></div>
-    </div>
-
-    <div class="card heatmap-card">
+    <div class="card pitch-card">
       <div class="card-title">Touch Heatmap</div>
       <svg id="heatmap-svg" viewBox="0 0 780 520" xmlns="http://www.w3.org/2000/svg"></svg>
     </div>
 
-    <div class="card shotmap-card">
+    <div class="card pitch-card">
       <div class="card-title">Season Shot Map</div>
       <svg id="shotmap-svg" viewBox="0 0 480 400" xmlns="http://www.w3.org/2000/svg"></svg>
     </div>
 
-    <div class="card disc-card">
-      <div class="card-title">Discipline</div>
-      <div class="mini-stat-row"><span>Fouls Committed</span><span class="v">${p.fouls}</span></div>
-      <div class="mini-stat-row"><span>Yellow Cards</span><span class="v" style="color:var(--amber)">${p.yellow_cards}</span></div>
-      <div class="mini-stat-row"><span>Red Cards</span><span class="v" style="color:var(--red)">${p.red_cards}</span></div>
+    <div class="form-strip">
+      <div class="ft-label">Recent Form</div>
+      <div class="form-row" id="form-row"></div>
+    </div>
+
+    <div class="ticker">
+      <div class="ticker-item"><span class="tl">Matches</span><span class="tv">${p.matches}</span></div>
+      <div class="ticker-item"><span class="tl">Shots</span><span class="tv">${p.shots}</span></div>
+      <div class="ticker-item"><span class="tl">On Target</span><span class="tv">${p.shots_on_target}</span></div>
+      <div class="ticker-item"><span class="tl">Pass %</span><span class="tv">${p.pass_pct}%</span></div>
+      <div class="ticker-item"><span class="tl">Fouls</span><span class="tv">${p.fouls}</span></div>
+      <div class="ticker-item"><span class="tl">Yellow</span><span class="tv" style="color:var(--amber)">${p.yellow_cards}</span></div>
+      <div class="ticker-item"><span class="tl">Red</span><span class="tv" style="color:var(--red)">${p.red_cards}</span></div>
     </div>
   `;
 
   buildFormRow(p, color);
-  buildPercentiles(p, color);
+  buildGauges(p, color);
   buildHeatmap(p, color);
   buildShotMap(p, color);
   initDashHover();
@@ -288,21 +302,34 @@ function buildFormRow(p, color) {
   });
 }
 
-function buildPercentiles(p, color) {
+function buildGauges(p, color) {
+  document.getElementById('gauge-title').textContent =
+    `Percentile vs ${GROUP_LABEL[p.position_group]}s`;
+
   const metrics = [
-    {key:'goals_p90', label:'Goals / 90'},
-    {key:'assists_p90', label:'Assists / 90'},
-    {key:'xg_p90', label:'xG / 90'},
-    {key:'shots_p90', label:'Shots / 90'},
+    {key:'goals_p90', label:'Goals/90'},
+    {key:'assists_p90', label:'Assists/90'},
+    {key:'xg_p90', label:'xG/90'},
+    {key:'shots_p90', label:'Shots/90'},
     {key:'pass_pct', label:'Pass %'},
   ];
-  document.getElementById('pct-rows').innerHTML = metrics.map(m => {
+
+  document.getElementById('gauge-rows').innerHTML = metrics.map(m => {
     const pct = p[m.key+'_pct'] ?? 50;
+    const r = 34, cx = 44, cy = 44;
+    const circ = 2*Math.PI*r;
+    const fillLen = circ*(pct/100);
     return `
-      <div class="pct-row">
-        <div class="pct-label">${m.label}</div>
-        <div class="pct-track"><div class="pct-fill" style="width:${pct}%"></div></div>
-        <div class="pct-val">${Math.round(pct)}th pct</div>
+      <div class="gauge">
+        <svg class="gauge-svg" viewBox="0 0 88 88" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="var(--panel2)" stroke-width="9"/>
+          <circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${color}" stroke-width="9"
+                  stroke-linecap="round" stroke-dasharray="${fillLen} ${circ}"
+                  transform="rotate(-90 ${cx} ${cy})"/>
+          <text x="${cx}" y="${cy+5}" text-anchor="middle" font-size="17" font-weight="700"
+                fill="var(--text-pri)" font-family="Bebas Neue, Impact, sans-serif">${Math.round(pct)}</text>
+        </svg>
+        <div class="gauge-label">${m.label}</div>
       </div>
     `;
   }).join('');
